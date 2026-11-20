@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Google Search Console Sitemap
+Sitemap: https://solvify-hub.onrender.com/sitemap.xml
