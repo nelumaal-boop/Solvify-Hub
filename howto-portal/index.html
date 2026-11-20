@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SolvifyHub — Universal Life & Tech Solution Engine (English & हिन्दी)</title>
+  <meta name="description" content="Exhaustive, battle-tested solutions for the hardest problems humans face: panic attacks, chronic insomnia, crippling debt, severe back pain, procrastination, and algorithmic wealth systems. In English and Hindi.">
+  
+  <!-- Google Search Console Verification -->
+  <meta name="google-site-verification" content="googlecccccdc404ce1a05.html">
+  <meta name="google-site-verification" content="cccccdc404ce1a05">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💡</text></svg>">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Additional bilingual tweaks */
+    .btn-lang {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.45rem 0.85rem;
+      border-radius: var(--radius-md);
+      font-size: 0.825rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn-lang:hover {
+      background-color: var(--bg-card-hover);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+    }
+    .lang-switcher-pill {
+      display: inline-flex;
+      background: var(--bg-main);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-full);
+      padding: 2px;
+      gap: 2px;
+    }
+    .lang-pill-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 0.3rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .lang-pill-btn.active {
+      background: var(--accent-primary);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sticky Top Navigation -->
+  <header class="header-sticky">
+    <div class="container header-content">
+      <a href="#" class="logo-link" onclick="window.resetFilters(); return false;">
+        <div class="logo-badge">
+          <i class="fas fa-cube"></i>
+        </div>
+        <div>
+          <span>Solvify<span style="color: var(--accent-primary);">Hub</span></span>
+          <span class="logo-tagline" data-i18n="siteTagline">Pro Solutions</span>
+        </div>
+      </a>
+
+      <div class="nav-actions">
+        <!-- Language Switcher Button -->
+        <button class="btn-lang" id="langToggleBtn" title="Switch Language (English / हिन्दी)">
+          <i class="fas fa-language"></i> <span>हिन्दी</span>
+        </button>
+
+        <button class="btn btn-secondary" id="headerBookmarksBtn" title="View Saved Bookmarks">
+          <i class="fas fa-bookmark" style="color: var(--accent-rose);"></i>
+          <span data-i18n="savedBtn">Saved</span>
+          <span class="badge-counter" id="bookmarkCountBadge">0</span>
+        </button>
+
+        <button class="btn-icon" id="themeToggleBtn" title="Toggle Dark/Light Mode">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-glow"></div>
+    <div class="container hero-content">
+      <div class="hero-pill" data-i18n="heroPill">
+        <i class="fas fa-check-double"></i> 100% Tested & Verified Universal Solutions
+      </div>
+      <h1 class="hero-title">
+        <span data-i18n="heroTitle1">Every Hard Human Problem,</span> <br>
+        <span class="hero-title-gradient" data-i18n="heroTitle2">Engineered With Exhaustive Detail.</span>
+      </h1>
+      <p class="hero-subtitle" data-i18n="heroSubtitle">
+        Evidence-based protocols for anxiety, insomnia, debt, chronic pain, relationship friction, and algorithmic trading systems. In English & हिन्दी.
+      </p>
+
+      <!-- Instant Search Bar -->
+      <div class="search-wrapper">
+        <i class="fas fa-search search-icon-left"></i>
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="Search any human problem or error (e.g. 'panic attack', 'अनिद्रा', 'debt', 'कमर दर्द', 'gold bot', 'sleep')..."
+          autocomplete="off"
+        >
+        <button id="searchClearBtn" class="search-clear-btn" title="Clear search" style="display: none;" aria-label="Clear Search">
+          <i class="fas fa-times"></i>
+        </button>
+        <span class="search-shortcut" title="Press / anywhere to search">/</span>
+      </div>
+
+      <!-- Quick Search Trending Tags (Hidden) -->
+      <div class="quick-tags" id="quickTagsContainer" style="display: none;"></div>
+    </div>
+  </section>
+
+  <!-- Main Content & Filter Toolbar -->
+  <main class="container">
+    <!-- Value Stats Banner -->
+    <div class="stats-banner">
+      <div class="stat-item">
+        <div class="stat-icon"><i class="fas fa-microscope"></i></div>
+        <div>
+          <div class="stat-number" data-i18n="stat1Title">100% Actionable</div>
+          <div class="stat-desc" data-i18n="stat1Desc">Exact protocols & zero fluff</div>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon" style="background-color: rgba(16, 185, 129, 0.1); color: var(--accent-emerald);"><i class="fas fa-tasks"></i></div>
+        <div>
+          <div class="stat-number" data-i18n="stat2Title">Interactive Steps</div>
+          <div class="stat-desc" data-i18n="stat2Desc">Checklist progress tracking</div>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon" style="background-color: rgba(245, 158, 11, 0.1); color: var(--accent-amber);"><i class="fas fa-notes-medical"></i></div>
+        <div>
+          <div class="stat-number" data-i18n="stat3Title">Forensic Fixes</div>
+          <div class="stat-desc" data-i18n="stat3Desc">Root causes & verified solutions</div>
+        </div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon" style="background-color: rgba(139, 92, 246, 0.1); color: var(--accent-violet);"><i class="fas fa-file-export"></i></div>
+        <div>
+          <div class="stat-number" data-i18n="stat4Title">Export Ready</div>
+          <div class="stat-desc" data-i18n="stat4Desc">Markdown & PDF export</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Tabs & Controls Toolbar -->
+    <div class="toolbar-container">
+      <div class="category-tabs-wrapper">
+        <button id="catScrollLeftBtn" class="cat-nav-btn cat-nav-left" title="Scroll Left" aria-label="Scroll categories left">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="category-tabs" id="categoryTabsContainer">
+          <!-- Dynamically rendered tabs in English / Hindi -->
+        </div>
+        <button id="catScrollRightBtn" class="cat-nav-btn cat-nav-right" title="Scroll Right" aria-label="Scroll categories right">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <div class="secondary-filters">
+        <div class="filter-group">
+          <label for="difficultySelect" data-i18n="diffLabel" style="font-size: 0.85rem; color: var(--text-dim); font-weight: 600;">Difficulty:</label>
+          <select id="difficultySelect" class="select-filter">
+            <option value="all" data-i18n="allDiff">All Difficulties</option>
+            <option value="Beginner" data-i18n="diffBeginner">Beginner / Immediate</option>
+            <option value="Intermediate" data-i18n="diffIntermediate">Intermediate</option>
+            <option value="Advanced" data-i18n="diffAdvanced">Advanced</option>
+          </select>
+
+          <label for="sortSelect" data-i18n="sortLabel" style="font-size: 0.85rem; color: var(--text-dim); font-weight: 600; margin-left: 0.5rem;">Sort by:</label>
+          <select id="sortSelect" class="select-filter">
+            <option value="popular" data-i18n="sortPopular">Most Popular</option>
+            <option value="highest-rated" data-i18n="sortRated">Highest Success Rate</option>
+            <option value="quickest" data-i18n="sortQuickest">Quickest (< 15 mins)</option>
+            <option value="newest" data-i18n="sortNewest">Most Upvoted</option>
+          </select>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <span id="activeResultsCount" style="font-size: 0.85rem; color: var(--text-dim);">17 solutions available</span>
+          <div class="view-toggles">
+            <button class="view-btn active" id="viewGridBtn" title="Grid View"><i class="fas fa-th"></i></button>
+            <button class="view-btn" id="viewListBtn" title="Compact List View"><i class="fas fa-bars"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Solutions Cards Grid -->
+    <div id="solutionsGrid" class="solutions-grid">
+      <!-- Dynamically populated by js/app.js -->
+    </div>
+  </main>
+
+  <!-- Detailed Solution Viewer Overlay -->
+  <div id="detailViewOverlay" class="detail-view-overlay" role="dialog" aria-modal="true">
+    <div id="detailViewContainer" class="detail-view-container">
+      
+      <!-- Top Scroll Progress Bar -->
+      <div class="reading-progress-track">
+        <div id="detailProgressBar" class="reading-progress-bar"></div>
+      </div>
+
+      <!-- Detail Header -->
+      <div class="detail-header">
+        <div class="detail-nav-bar">
+          <button id="closeDetailBtn" class="btn-close-detail">
+            <i class="fas fa-arrow-left"></i> <span data-i18n="backToSolutions">Back to all solutions</span>
+          </button>
+          
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <!-- Bilingual Toggle inside Guide Modal -->
+            <div class="lang-switcher-pill">
+              <button class="lang-pill-btn active" id="detailLangSwitchEn">🇬🇧 English</button>
+              <button class="lang-pill-btn" id="detailLangSwitchHi">🇮🇳 हिन्दी</button>
+            </div>
+            <span id="detailCategoryBadge" class="card-category-badge cat-psychology">Psychology</span>
+          </div>
+        </div>
+
+        <!-- Featured Guide Hero Banner Image -->
+        <div id="detailHeroBanner" class="detail-hero-banner" style="display: none;">
+          <img id="detailHeroImg" class="detail-hero-img" alt="Guide Cover" loading="lazy">
+        </div>
+
+        <h2 id="detailTitle" class="detail-title">Solution Title</h2>
+
+        <div class="detail-meta-grid">
+          <span class="meta-chip" id="detailDifficulty"><i class="fas fa-signal"></i> Intermediate</span>
+          <span class="meta-chip" id="detailTime"><i class="far fa-clock"></i> 15 mins</span>
+          <span class="meta-chip" id="detailVerified"><i class="fas fa-check-circle"></i> Verified</span>
+          <span class="meta-chip" id="detailSuccessRate"><i class="fas fa-chart-pie"></i> 99.2% Success</span>
+        </div>
+
+        <div class="detail-actions-bar">
+          <button class="btn btn-secondary" id="detailBookmarkBtn">
+            <i class="far fa-heart"></i> <span data-i18n="bookmarkBtn">Bookmark Solution</span>
+          </button>
+          <button class="btn btn-secondary" id="btnDownloadMd" title="Export this guide as a clean Markdown document">
+            <i class="fas fa-file-download"></i> <span data-i18n="downloadMd">Download .md</span>
+          </button>
+          <button class="btn btn-secondary" id="btnPrintPdf" title="Print or save as PDF">
+            <i class="fas fa-print"></i> <span data-i18n="printPdf">Print / PDF</span>
+          </button>
+          <button class="btn btn-secondary" id="btnShareLink" title="Copy direct link to clipboard">
+            <i class="fas fa-share-alt"></i> <span data-i18n="shareLink">Share Link</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Detail Content Body -->
+      <div class="detail-content">
+        <!-- Overview Summary -->
+        <div class="section-box">
+          <h3 class="section-title"><i class="fas fa-info-circle" style="color: var(--accent-primary);"></i> <span data-i18n="overviewScope">Overview & Scope</span></h3>
+          <p id="detailSummaryText" style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;"></p>
+        </div>
+
+        <!-- Prerequisites Checklist -->
+        <div class="section-box">
+          <h3 class="section-title"><i class="fas fa-clipboard-check" style="color: var(--accent-emerald);"></i> <span data-i18n="prereqTitle">Prerequisites & Readiness</span></h3>
+          <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.75rem;" data-i18n="prereqDesc">Verify readiness before executing:</p>
+          <ul id="detailPrereqList" class="prereq-list"></ul>
+        </div>
+
+        <!-- Step-by-Step Execution Sequence -->
+        <div style="margin-bottom: 2rem;">
+          <h3 class="section-title" style="margin-bottom: 1.25rem;">
+            <i class="fas fa-list-ol" style="color: var(--accent-primary);"></i> <span data-i18n="stepsTitle">Step-by-Step Implementation Instructions</span>
+          </h3>
+          <div id="detailStepsList" class="step-container"></div>
+        </div>
+
+        <!-- Troubleshooting Matrix -->
+        <div id="troubleshootingSection" class="section-box" style="display: none;">
+          <h3 class="section-title"><i class="fas fa-wrench" style="color: var(--accent-amber);"></i> <span data-i18n="troubleTitle">Troubleshooting & Common Pitfalls</span></h3>
+          <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 1rem;" data-i18n="troubleDesc">Click any issue to view root cause and verified resolution:</p>
+          <div id="detailTroubleshootList" class="troubleshoot-list"></div>
+        </div>
+
+        <!-- Verification & Testing -->
+        <div id="verificationSection" class="section-box" style="display: none;">
+          <h3 class="section-title"><i class="fas fa-vial" style="color: var(--accent-emerald);"></i> <span data-i18n="verifyTitle">Verification & Health Check</span></h3>
+          <p style="font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.5rem;" data-i18n="verifyDesc">Confirm your progress or test result:</p>
+          <div id="detailVerificationBox"></div>
+        </div>
+
+        <!-- FAQs Section -->
+        <div id="faqSection" class="section-box" style="display: none;">
+          <h3 class="section-title"><i class="fas fa-question-circle" style="color: var(--accent-violet);"></i> <span data-i18n="faqTitle">Frequently Asked Questions</span></h3>
+          <div id="detailFaqList" class="faq-list"></div>
+        </div>
+
+        <!-- Helpful Rating Feedback -->
+        <div class="feedback-box">
+          <h4 style="font-size: 1.1rem; margin-bottom: 0.25rem;" data-i18n="feedbackTitle">Was this solution helpful?</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted);" data-i18n="feedbackDesc">Your feedback improves our verified technical and life guides.</p>
+          <div class="feedback-buttons">
+            <button class="btn btn-secondary" id="feedbackYesBtn"><i class="fas fa-thumbs-up" style="color: var(--accent-emerald);"></i> <span data-i18n="feedbackYes">Yes, it helped! 👍</span></button>
+            <button class="btn btn-secondary" id="feedbackNoBtn"><i class="fas fa-thumbs-down" style="color: var(--accent-rose);"></i> <span data-i18n="feedbackNo">Needs improvement 👎</span></button>
+          </div>
+          <div id="feedbackThanksMsg" style="display: none; color: var(--accent-emerald); font-weight: 600; margin-top: 0.75rem; font-size: 0.9rem;"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- About Us Modal -->
+  <div id="aboutModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card info-modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <i class="fas fa-circle-info" style="color: var(--accent-cyan);"></i>
+          <span data-i18n="aboutModalTitle">About SolvifyHub</span>
+        </h3>
+        <button class="btn-close-modal" id="closeAboutBtn" aria-label="Close About Modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div id="aboutModalBody" class="info-modal-body">
+        <!-- Dynamically rendered by language -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Legal & Safety Disclaimer Modal -->
+  <div id="disclaimerModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card info-modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <i class="fas fa-scale-balanced" style="color: var(--accent-amber);"></i>
+          <span data-i18n="disclaimerModalTitle">Legal & Safety Disclaimer</span>
+        </h3>
+        <button class="btn-close-modal" id="closeDisclaimerBtn" aria-label="Close Disclaimer Modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div id="disclaimerModalBody" class="info-modal-body">
+        <!-- Dynamically rendered by language -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Us Modal -->
+  <div id="contactModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-card info-modal-card" style="max-width: 460px;">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <i class="fas fa-envelope" style="color: var(--accent-primary);"></i>
+          <span data-i18n="contactModalTitle">Contact Us</span>
+        </h3>
+        <button class="btn-close-modal" id="closeContactBtn" aria-label="Close Contact Modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div style="padding: 1.25rem 0 0.5rem; text-align: center;">
+        <div style="margin-bottom: 1.25rem;">
+          <a href="mailto:rprrpf1@gmail.com" id="contactEmailDisplay" style="font-size: 1.15rem; font-weight: 700; color: var(--accent-primary); text-decoration: none; padding: 0.6rem 1.2rem; border-radius: var(--radius-md); background: rgba(37, 99, 235, 0.08); display: inline-flex; align-items: center; gap: 0.6rem;">
+            <i class="fas fa-envelope"></i> rprrpf1@gmail.com
+          </a>
+        </div>
+        <div>
+          <button class="btn btn-secondary" id="btnCopyContactEmail">
+            <i class="far fa-copy"></i> <span data-i18n="copyEmailBtn">Copy Email</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Root -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="#" class="footer-link" onclick="window.resetFilters(); return false;" data-i18n="footerAll">All Solutions</a>
+        <a href="#" class="footer-link" onclick="document.getElementById('headerBookmarksBtn').click(); return false;" data-i18n="footerSaved">Saved Bookmarks</a>
+        <a href="#" class="footer-link" id="footerAboutLink" data-i18n="footerAbout">About Us</a>
+        <a href="#" class="footer-link" id="footerContactLink" data-i18n="footerContact">Contact Us</a>
+        <a href="#" class="footer-link" id="footerDisclaimerLink" data-i18n="footerDisclaimer">Legal Disclaimer</a>
+        <a href="#" class="footer-link" onclick="document.getElementById('langToggleBtn').click(); return false;" data-i18n="footerLang">Language: English / हिन्दी</a>
+      </div>
+
+      <p style="margin-bottom: 0.5rem;">SolvifyHub &copy; 2026 — Universal Step-by-Step Life & Tech Knowledge Base.</p>
+      <p style="font-size: 0.775rem; color: var(--text-dim);" data-i18n="footerTagline">Engineered with exact instructions in English and हिन्दी for the hardest challenges humans encounter.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data/guides.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
